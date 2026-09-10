@@ -1,5 +1,5 @@
-// dto/HealthResponse.java
-package com.example.eventpass.dto;
+package com.example.eventpass.entity.dto.venue;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,8 +10,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class HealthResponse {
+public class CreateVenueRequest {
 
-    private String application;
-    private String status;
+    private String name;
+    private String address;
 }

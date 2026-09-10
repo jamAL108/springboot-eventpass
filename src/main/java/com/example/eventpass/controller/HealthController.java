@@ -1,7 +1,7 @@
 // controller/HealthController.java
 package com.example.eventpass.controller;
 
-import com.example.eventpass.dto.HealthResponse;
+import com.example.eventpass.entity.dto.HealthResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
