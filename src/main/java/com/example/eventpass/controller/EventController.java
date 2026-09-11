@@ -1,5 +1,6 @@
 package com.example.eventpass.controller;
 
+import com.example.eventpass.entity.dto.EventSeatResponse;
 import com.example.eventpass.entity.dto.event.CreateEventRequest;
 import com.example.eventpass.entity.dto.event.CreateEventResponse;
 import com.example.eventpass.entity.dto.event.EventResponse;
@@ -36,5 +37,11 @@ public class EventController {
     public ResponseEntity<EventResponse> addEvent(@Valid @RequestBody CreateEventRequest request){
         EventResponse createdEvent = eventService.addEvent(request);
         return ResponseEntity.status(201).body(createdEvent);
+    }
+
+    @GetMapping("{id}/seats")
+    public ResponseEntity<List<EventSeatResponse>> getSeatsByEvent(@PathVariable Long id){
+        List<EventSeatResponse> eventSeats = eventService.getSeatsByEventId(id);
+        return ResponseEntity.ok(eventSeats);
     }
 }
