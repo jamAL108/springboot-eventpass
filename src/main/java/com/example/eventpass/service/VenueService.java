@@ -39,4 +39,8 @@ public class VenueService {
                 .orElseThrow(() -> new VenueNotFoundException("Venue Not Found"));
         return modelMapper.map(venue, VenueResponse.class);
     }
+
+    public void removeVanue(Long id){
+        venueRepository.deleteById(id);
+    }
 }

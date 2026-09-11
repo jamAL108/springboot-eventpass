@@ -37,4 +37,10 @@ public class VenueController {
         VenueResponse venue = venueService.getVenueById(id);
         return ResponseEntity.ok(venue);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> removeVenue(@PathVariable Long id){
+        venueService.removeVanue(id);
+        return ResponseEntity.noContent().build();
+    }
 }
