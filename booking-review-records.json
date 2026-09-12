@@ -1,0 +1,46 @@
+{
+  "venue": {
+    "id": 152,
+    "name": "Indigo Arts Hall",
+    "address": "18 Lakeview Road, Bengaluru"
+  },
+  "event": {
+    "id": 152,
+    "name": "An Evening of Monsoon Jazz",
+    "venueName": "Indigo Arts Hall",
+    "venueAddress": "18 Lakeview Road, Bengaluru",
+    "eventDate": "2026-12-19"
+  },
+  "user": {
+    "id": 2,
+    "name": "Ananya Rao",
+    "email": "ananya.rao.2860bc05@example.com",
+    "bio": "Enjoys live jazz and acoustic concerts"
+  },
+  "artist": {
+    "id": 52,
+    "name": "The Monsoon Quartet"
+  },
+  "eventSeats": [
+    {
+      "id": 52,
+      "seatNumber": "A1",
+      "status": "AVAILABLE"
+    },
+    {
+      "id": 53,
+      "seatNumber": "A2",
+      "status": "AVAILABLE"
+    },
+    {
+      "id": 54,
+      "seatNumber": "A3",
+      "status": "AVAILABLE"
+    },
+    {
+      "id": 55,
+      "seatNumber": "A4",
+      "status": "AVAILABLE"
+    }
+  ]
+}

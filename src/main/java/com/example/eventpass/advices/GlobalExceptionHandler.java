@@ -1,9 +1,6 @@
 package com.example.eventpass.advices;
 
-import com.example.eventpass.exceptions.ArtistNotFoundException;
-import com.example.eventpass.exceptions.EventNotFoundException;
-import com.example.eventpass.exceptions.UserNotFoundException;
-import com.example.eventpass.exceptions.VenueNotFoundException;
+import com.example.eventpass.exceptions.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -11,29 +8,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(VenueNotFoundException.class)
-    public ResponseEntity<String> venueNotFound(VenueNotFoundException ex){
-        return ResponseEntity
-                .status(404)
-                .body(ex.getMessage());
-    }
-
-    @ExceptionHandler(EventNotFoundException.class)
-    public ResponseEntity<String> eventNotFound(EventNotFoundException ex){
-        return ResponseEntity
-                .status(404)
-                .body(ex.getMessage());
-    }
-
-    @ExceptionHandler(ArtistNotFoundException.class)
-    public ResponseEntity<String> artistNotFound(ArtistNotFoundException ex){
-        return ResponseEntity
-                .status(404)
-                .body(ex.getMessage());
-    }
-
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<String> userNotFound(UserNotFoundException ex){
+    @ExceptionHandler({BookingNotFoundException.class, VenueNotFoundException.class, EventNotFoundException.class, ArtistNotFoundException.class, UserNotFoundException.class})
+    public ResponseEntity<String> NotFound(VenueNotFoundException ex){
         return ResponseEntity
                 .status(404)
                 .body(ex.getMessage());
