@@ -7,6 +7,7 @@ import com.example.eventpass.service.SeatService;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,13 +15,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/venue/{venueId}/seats")
+@RequiredArgsConstructor
 public class SeatController {
 
     private final SeatService seatService;
-
-    public SeatController(SeatService seatService){
-        this.seatService = seatService;
-    }
 
     @GetMapping()
     public ResponseEntity<List<VenueSeatResponse>> getAllSeats(@PathVariable Long venueId){

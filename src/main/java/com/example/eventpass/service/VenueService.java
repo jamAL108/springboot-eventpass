@@ -5,21 +5,18 @@ import com.example.eventpass.entity.dto.venue.CreateVenueRequest;
 import com.example.eventpass.entity.dto.venue.VenueResponse;
 import com.example.eventpass.exceptions.VenueNotFoundException;
 import com.example.eventpass.persistence.VenueRepository;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class VenueService {
 
     private final VenueRepository venueRepository;
     private final ModelMapper modelMapper;
-
-    public VenueService(VenueRepository venueRepository, ModelMapper modelMapper){
-        this.venueRepository = venueRepository;
-        this.modelMapper = modelMapper;
-    }
 
     public List<VenueResponse> getallVenue(){
         return venueRepository.findAll()

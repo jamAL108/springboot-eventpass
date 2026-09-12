@@ -7,6 +7,7 @@ import com.example.eventpass.entity.dto.event.CreateEventResponse;
 import com.example.eventpass.entity.dto.event.EventResponse;
 import com.example.eventpass.service.EventService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,13 +15,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/events")
+@RequiredArgsConstructor
 public class EventController {
 
     private final EventService eventService;
-
-    public EventController(EventService eventService){
-        this.eventService = eventService;
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<EventResponse> getEventById(@PathVariable Long id){

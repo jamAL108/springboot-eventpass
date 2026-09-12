@@ -7,24 +7,19 @@ import com.example.eventpass.entity.dto.seat.VenueSeatResponse;
 import com.example.eventpass.exceptions.VenueNotFoundException;
 import com.example.eventpass.persistence.SeatRepository;
 import com.example.eventpass.persistence.VenueRepository;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class SeatService {
-
 
     private final SeatRepository seatRepository;
     private final VenueRepository venueRepository;
     private final ModelMapper modelMapper;
-
-    public SeatService(SeatRepository seatRepository, VenueRepository venueRepository, ModelMapper modelMapper){
-        this.seatRepository = seatRepository;
-        this.venueRepository = venueRepository;
-        this.modelMapper = modelMapper;
-    }
 
     public List<VenueSeatResponse> getAllSeats(Long venueId) {
         Boolean venueExists = venueRepository.existsById(venueId);

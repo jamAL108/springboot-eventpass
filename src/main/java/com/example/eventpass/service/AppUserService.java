@@ -5,21 +5,18 @@ import com.example.eventpass.entity.dto.AppUser.AppUserResponse;
 import com.example.eventpass.entity.dto.AppUser.CreateAppUserRequest;
 import com.example.eventpass.exceptions.UserNotFoundException;
 import com.example.eventpass.persistence.AppUserRepository;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class AppUserService {
 
     private final AppUserRepository appUserRepository;
     private final ModelMapper modelMapper;
-
-    AppUserService(AppUserRepository appUserRepository, ModelMapper modelMapper){
-        this.appUserRepository = appUserRepository;
-        this.modelMapper = modelMapper;
-    }
 
     public List<AppUserResponse> getAllUsers(){
         return appUserRepository.findAll()

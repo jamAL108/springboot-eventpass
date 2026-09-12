@@ -4,6 +4,7 @@ import com.example.eventpass.entity.dto.artist.ArtistResponse;
 import com.example.eventpass.entity.dto.artist.CreateArtistRequest;
 import com.example.eventpass.service.ArtistService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,13 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/artist")
+@RequiredArgsConstructor
 public class ArtistController {
 
     private final ArtistService artistService;
-
-    public ArtistController(ArtistService artistService){
-        this.artistService = artistService;
-    }
 
     @GetMapping()
     public ResponseEntity<List<ArtistResponse>> getAllArtist(){

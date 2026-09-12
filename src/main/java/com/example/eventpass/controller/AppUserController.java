@@ -7,6 +7,7 @@ import com.example.eventpass.entity.dto.artist.ArtistResponse;
 import com.example.eventpass.entity.dto.artist.CreateArtistRequest;
 import com.example.eventpass.service.AppUserService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,13 +15,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
+@RequiredArgsConstructor
 public class AppUserController {
 
     private final AppUserService appUserService;
-
-    public AppUserController(AppUserService appUserService){
-        this.appUserService = appUserService;
-    }
 
     @GetMapping()
     public ResponseEntity<List<AppUserResponse>> getAllArtist(){

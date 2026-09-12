@@ -11,6 +11,7 @@ import com.example.eventpass.exceptions.EventNotFoundException;
 import com.example.eventpass.exceptions.VenueNotFoundException;
 import com.example.eventpass.persistence.*;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class EventService {
 
     private final EventRepository eventRepository;
@@ -27,16 +29,6 @@ public class EventService {
     private final EventArtistRepository eventArtistRepository;
     private final ArtistRepository artistRepository;
     private final ModelMapper modelMapper;
-
-    public EventService(EventRepository eventRepository, ArtistRepository artistRepository, EventArtistRepository eventArtistRepository, EventSeatRepository eventSeatRepository, VenueRepository venueRepository, SeatRepository seatRepository, ModelMapper modelMapper){
-        this.eventRepository = eventRepository;
-        this.venueRepository = venueRepository;
-        this.seatRepository = seatRepository;
-        this.artistRepository = artistRepository;
-        this.eventArtistRepository = eventArtistRepository;
-        this.eventSeatRepository = eventSeatRepository;
-        this.modelMapper = modelMapper;
-    }
 
     public EventResponse findById(Long id){
         Event event = eventRepository.findById(id)
