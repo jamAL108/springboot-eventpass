@@ -1,41 +1,13 @@
 package com.example.eventpass.service;
 
-import com.example.eventpass.entity.Artist;
-import com.example.eventpass.entity.Event;
 import com.example.eventpass.entity.dto.artist.ArtistResponse;
 import com.example.eventpass.entity.dto.artist.CreateArtistRequest;
-import com.example.eventpass.entity.dto.event.EventResponse;
-import com.example.eventpass.exceptions.EventNotFoundException;
-import com.example.eventpass.persistence.ArtistRepository;
-import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-@RequiredArgsConstructor
-public class ArtistService {
+public interface ArtistService {
 
-    private final ArtistRepository artistRepository;
-    private final ModelMapper modelMapper;
-
-    public List<ArtistResponse> getAllArtist(){
-        return artistRepository.findAll()
-                .stream()
-                .map(artist -> modelMapper.map(artist, ArtistResponse.class))
-                .toList();
-    }
-
-    public ArtistResponse findById(Long id){
-        Artist artist = artistRepository.findById(id)
-                .orElseThrow(()-> new EventNotFoundException("Artist not Found with id: " + id));
-        return modelMapper.map(artist, ArtistResponse.class);
-    }
-
-    public ArtistResponse createArtist(CreateArtistRequest request){
-        Artist artist = modelMapper.map(request, Artist.class);
-        Artist createdArtist = artistRepository.save(artist);
-        return modelMapper.map(createdArtist, ArtistResponse.class);
-    }
+    List<ArtistResponse> getAllArtist();
+    ArtistResponse findById(Long id);
+    ArtistResponse createArtist(CreateArtistRequest request);
 }

@@ -1,10 +1,8 @@
 package com.example.eventpass.controller;
 
-import com.example.eventpass.entity.Venue;
 import com.example.eventpass.entity.dto.venue.CreateVenueRequest;
 import com.example.eventpass.entity.dto.venue.VenueResponse;
-import com.example.eventpass.persistence.VenueRepository;
-import com.example.eventpass.service.VenueService;
+import com.example.eventpass.service.Impl.VenueServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +14,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VenueController {
 
-    private final VenueService venueService;
-    
+    private final VenueServiceImpl venueService;
+
     @GetMapping()
     public ResponseEntity<List<VenueResponse>> getAllVenue(){
         List<VenueResponse> venues =  venueService.getallVenue();

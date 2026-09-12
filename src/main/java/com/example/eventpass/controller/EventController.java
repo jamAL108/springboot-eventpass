@@ -3,9 +3,8 @@ package com.example.eventpass.controller;
 import com.example.eventpass.entity.dto.EventSeatResponse;
 import com.example.eventpass.entity.dto.artist.ArtistResponse;
 import com.example.eventpass.entity.dto.event.CreateEventRequest;
-import com.example.eventpass.entity.dto.event.CreateEventResponse;
 import com.example.eventpass.entity.dto.event.EventResponse;
-import com.example.eventpass.service.EventService;
+import com.example.eventpass.service.Impl.EventServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EventController {
 
-    private final EventService eventService;
+    private final EventServiceImpl eventService;
 
     @GetMapping("/{id}")
     public ResponseEntity<EventResponse> getEventById(@PathVariable Long id){

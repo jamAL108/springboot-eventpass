@@ -1,11 +1,8 @@
 package com.example.eventpass.controller;
 
-import com.example.eventpass.entity.Seat;
 import com.example.eventpass.entity.dto.seat.CreateSeatRequest;
 import com.example.eventpass.entity.dto.seat.VenueSeatResponse;
-import com.example.eventpass.service.SeatService;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
+import com.example.eventpass.service.Impl.SeatServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SeatController {
 
-    private final SeatService seatService;
+    private final SeatServiceImpl seatService;
 
     @GetMapping()
     public ResponseEntity<List<VenueSeatResponse>> getAllSeats(@PathVariable Long venueId){

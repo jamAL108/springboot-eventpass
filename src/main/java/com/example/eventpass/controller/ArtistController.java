@@ -2,7 +2,7 @@ package com.example.eventpass.controller;
 
 import com.example.eventpass.entity.dto.artist.ArtistResponse;
 import com.example.eventpass.entity.dto.artist.CreateArtistRequest;
-import com.example.eventpass.service.ArtistService;
+import com.example.eventpass.service.Impl.ArtistServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ArtistController {
 
-    private final ArtistService artistService;
+    private final ArtistServiceImpl artistService;
 
     @GetMapping()
     public ResponseEntity<List<ArtistResponse>> getAllArtist(){

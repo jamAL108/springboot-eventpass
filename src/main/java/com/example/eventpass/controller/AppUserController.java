@@ -1,11 +1,8 @@
 package com.example.eventpass.controller;
 
-import com.example.eventpass.entity.AppUser;
 import com.example.eventpass.entity.dto.AppUser.AppUserResponse;
 import com.example.eventpass.entity.dto.AppUser.CreateAppUserRequest;
-import com.example.eventpass.entity.dto.artist.ArtistResponse;
-import com.example.eventpass.entity.dto.artist.CreateArtistRequest;
-import com.example.eventpass.service.AppUserService;
+import com.example.eventpass.service.Impl.AppUserServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AppUserController {
 
-    private final AppUserService appUserService;
+    private final AppUserServiceImpl appUserService;
 
     @GetMapping()
     public ResponseEntity<List<AppUserResponse>> getAllArtist(){
