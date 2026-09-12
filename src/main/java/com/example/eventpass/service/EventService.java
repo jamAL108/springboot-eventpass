@@ -1,20 +1,15 @@
 package com.example.eventpass.service;
 
-import com.example.eventpass.entity.Event;
-import com.example.eventpass.entity.EventSeat;
-import com.example.eventpass.entity.Seat;
-import com.example.eventpass.entity.Venue;
+import com.example.eventpass.entity.*;
 import com.example.eventpass.entity.dto.EventSeatResponse;
+import com.example.eventpass.entity.dto.artist.ArtistResponse;
 import com.example.eventpass.entity.dto.event.CreateEventRequest;
-import com.example.eventpass.entity.dto.event.CreateEventResponse;
 import com.example.eventpass.entity.dto.event.EventResponse;
 import com.example.eventpass.entity.enums.EventSeatStatus;
+import com.example.eventpass.exceptions.ArtistNotFoundException;
 import com.example.eventpass.exceptions.EventNotFoundException;
 import com.example.eventpass.exceptions.VenueNotFoundException;
-import com.example.eventpass.persistence.EventRepository;
-import com.example.eventpass.persistence.EventSeatRepository;
-import com.example.eventpass.persistence.SeatRepository;
-import com.example.eventpass.persistence.VenueRepository;
+import com.example.eventpass.persistence.*;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -29,12 +24,16 @@ public class EventService {
     private final VenueRepository venueRepository;
     private final SeatRepository seatRepository;
     private final EventSeatRepository eventSeatRepository;
+    private final EventArtistRepository eventArtistRepository;
+    private final ArtistRepository artistRepository;
     private final ModelMapper modelMapper;
 
-    public EventService(EventRepository eventRepository,EventSeatRepository eventSeatRepository, VenueRepository venueRepository, SeatRepository seatRepository, ModelMapper modelMapper){
+    public EventService(EventRepository eventRepository, ArtistRepository artistRepository, EventArtistRepository eventArtistRepository, EventSeatRepository eventSeatRepository, VenueRepository venueRepository, SeatRepository seatRepository, ModelMapper modelMapper){
         this.eventRepository = eventRepository;
         this.venueRepository = venueRepository;
         this.seatRepository = seatRepository;
+        this.artistRepository = artistRepository;
+        this.eventArtistRepository = eventArtistRepository;
         this.eventSeatRepository = eventSeatRepository;
         this.modelMapper = modelMapper;
     }
@@ -79,6 +78,24 @@ public class EventService {
     public List<EventSeatResponse> getSeatsByEventId(Long id){
         Event event = eventRepository.findById(id)
                 .orElseThrow(()-> new EventNotFoundException("Event not Found with id: " + id));
-        return eventSeatRepository.findSeatsByEventId(event.getId());
+        return eventSeatRepository.findSeatsByEventId(id);
+    }
+
+    public List<ArtistResponse> getArtistsByEventId(Long id){
+        Event event = eventRepository.findById(id)
+                .orElseThrow(()-> new EventNotFoundException("Event not Found with id: " + id));
+        return eventArtistRepository.findArtistsByEventId(id);
+    }
+
+    @Transactional
+    public void addArtistToEvent(Long eventId, Long artistId){
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(()-> new EventNotFoundException("Event not Found with id: " + eventId));
+        Artist artist = artistRepository.findById(artistId)
+                .orElseThrow(()-> new ArtistNotFoundException("Artist not Found with id: " + artistId));
+        EventArtist eventArtist = new EventArtist();
+        eventArtist.setArtist(artist);
+        eventArtist.setEvent(event);
+        EventArtist createdEventArtist = eventArtistRepository.save(eventArtist);
     }
 }

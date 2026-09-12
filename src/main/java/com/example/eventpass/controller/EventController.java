@@ -1,6 +1,7 @@
 package com.example.eventpass.controller;
 
 import com.example.eventpass.entity.dto.EventSeatResponse;
+import com.example.eventpass.entity.dto.artist.ArtistResponse;
 import com.example.eventpass.entity.dto.event.CreateEventRequest;
 import com.example.eventpass.entity.dto.event.CreateEventResponse;
 import com.example.eventpass.entity.dto.event.EventResponse;
@@ -39,9 +40,21 @@ public class EventController {
         return ResponseEntity.status(201).body(createdEvent);
     }
 
-    @GetMapping("{id}/seats")
+    @GetMapping("/{id}/seats")
     public ResponseEntity<List<EventSeatResponse>> getSeatsByEvent(@PathVariable Long id){
         List<EventSeatResponse> eventSeats = eventService.getSeatsByEventId(id);
         return ResponseEntity.ok(eventSeats);
+    }
+
+    @GetMapping("/{id}/artists")
+    public ResponseEntity<List<ArtistResponse>> getArtistsByEvent(@PathVariable Long id){
+        List<ArtistResponse> eventArtists = eventService.getArtistsByEventId(id);
+        return ResponseEntity.ok(eventArtists);
+    }
+
+    @PutMapping("/{eventId}/artists/{artistId}")
+    public ResponseEntity<String> addArtistToEvent(@PathVariable Long eventId, @PathVariable Long artistId){
+        eventService.addArtistToEvent(eventId, artistId);
+        return ResponseEntity.noContent().build();
     }
 }
