@@ -2,6 +2,7 @@ package com.example.eventpass.advices;
 
 import com.example.eventpass.exceptions.ArtistNotFoundException;
 import com.example.eventpass.exceptions.EventNotFoundException;
+import com.example.eventpass.exceptions.UserNotFoundException;
 import com.example.eventpass.exceptions.VenueNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,6 +27,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ArtistNotFoundException.class)
     public ResponseEntity<String> artistNotFound(ArtistNotFoundException ex){
+        return ResponseEntity
+                .status(404)
+                .body(ex.getMessage());
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<String> userNotFound(UserNotFoundException ex){
         return ResponseEntity
                 .status(404)
                 .body(ex.getMessage());
