@@ -10,4 +10,5 @@ public interface BookingService {
 
     BookingResponse bookSeate(CreateBookingRequest reauest);
     BookingResponse getBookingById(Long id);
+    void cancelBooking(Long id);
 }

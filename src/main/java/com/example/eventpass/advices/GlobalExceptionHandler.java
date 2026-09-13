@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler({BookingNotFoundException.class, VenueNotFoundException.class, EventNotFoundException.class, ArtistNotFoundException.class, UserNotFoundException.class})
-    public ResponseEntity<String> NotFound(VenueNotFoundException ex){
+    public ResponseEntity<String> NotFound(RuntimeException  ex){
         return ResponseEntity
                 .status(404)
                 .body(ex.getMessage());

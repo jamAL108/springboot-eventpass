@@ -128,4 +128,30 @@ public class BookingServiceImpl implements BookingService {
 
         return response;
     }
+
+    @Override
+    @Transactional
+    public void cancelBooking(Long id){
+        Booking booking = bookingRepository.findByIdForUpdate(id)
+                .orElseThrow(()-> new BookingNotFoundException("Booking not found with id: " + id));
+
+        if(booking.getStatus()!=BookingStatus.CONFIRMED){
+            return;
+        }
+        if(booking.getEvent().getEventDate().isBefore(LocalDate.now())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Cannot cancel past event tickets");
+        }
+
+        List<EventSeatResponse> eventSeatResponses = bookingItemRepository.findSeatsByBookingId(booking.getId());
+        List<Long> eventSeatIds = eventSeatResponses
+                .stream()
+                .map(eventSeat -> eventSeat.getId())
+                .toList();
+        List<EventSeat> eventSeats = eventSeatRepository.findAllBySeatIds(eventSeatIds);
+
+        for(EventSeat eventSeat : eventSeats){
+            eventSeat.setStatus(EventSeatStatus.AVAILABLE);
+        }
+        booking.setStatus(BookingStatus.CANCELLED);
+    }
 }

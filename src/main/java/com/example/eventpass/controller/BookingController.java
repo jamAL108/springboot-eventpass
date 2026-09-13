@@ -27,4 +27,10 @@ public class BookingController {
         BookingResponse bookingInformation = bookingService.getBookingById(id);
         return ResponseEntity.ok(bookingInformation);
     }
+
+    @PostMapping("/{id}/cancel")
+    public ResponseEntity<String> cancelBooking(@PathVariable Long id){
+        bookingService.cancelBooking(id);
+        return ResponseEntity.noContent().build();
+    }
 }
