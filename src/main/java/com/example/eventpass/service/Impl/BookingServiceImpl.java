@@ -56,7 +56,8 @@ public class BookingServiceImpl implements BookingService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Duplicate seats selected");
         }
 
-        List<EventSeat> eventSeats = eventSeatRepository.findAllById(seatids);
+
+        List<EventSeat> eventSeats = eventSeatRepository.findAllBySeatIds(seatids);
 
         if(seatids.size() != eventSeats.size()){
             throw  new ResponseStatusException(HttpStatus.BAD_REQUEST, "Seats doesnt exist");

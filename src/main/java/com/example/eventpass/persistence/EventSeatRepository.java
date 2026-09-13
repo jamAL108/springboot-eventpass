@@ -2,7 +2,9 @@ package com.example.eventpass.persistence;
 
 import com.example.eventpass.entity.EventSeat;
 import com.example.eventpass.entity.dto.EventSeatResponse;
+import jakarta.persistence.LockModeType;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -22,4 +24,15 @@ public interface EventSeatRepository extends JpaRepository<EventSeat,Long> {
     """)
     List<EventSeatResponse> findSeatsByEventId(
             @Param("eventId") Long eventId);
+
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    @Query("""
+        SELECT es
+        FROM EventSeat es
+        WHERE es.id IN :eventSeatIds
+        ORDER BY es.id ASC
+        """)
+    List<EventSeat> findAllBySeatIds(
+            @Param("eventSeatIds") List<Long> eventSeatIds
+    );
 }
